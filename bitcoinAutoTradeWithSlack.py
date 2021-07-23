@@ -56,23 +56,23 @@ post_message(myToken,"#crypto", "autotrade start")
 while True:
     try:
         now = datetime.datetime.now()
-        start_time = get_start_time("KRW-BTC")
+        start_time = get_start_time("KRW-AXS")
         end_time = start_time + datetime.timedelta(days=1)
 
         if start_time < now < end_time - datetime.timedelta(seconds=10):
-            target_price = get_target_price("KRW-BTC", 0.5)
-            ma15 = get_ma15("KRW-BTC")
-            current_price = get_current_price("KRW-BTC")
+            target_price = get_target_price("KRW-AXS", 0.5)
+            ma15 = get_ma15("KRW-AXS")
+            current_price = get_current_price("KRW-AXS")
             if target_price < current_price and ma15 < current_price:
                 krw = get_balance("KRW")
                 if krw > 5000:
-                    buy_result = upbit.buy_market_order("KRW-BTC", krw*0.9995)
-                    post_message(myToken,"#crypto", "BTC buy : " +str(buy_result))
+                    buy_result = upbit.buy_market_order("KRW-AXS", krw*0.9995)
+                    post_message(myToken,"#crypto", "AXS buy : " +str(buy_result))
         else:
-            btc = get_balance("BTC")
-            if btc > 0.00008:
-                sell_result = upbit.sell_market_order("KRW-BTC", btc*0.9995)
-                post_message(myToken,"#crypto", "BTC buy : " +str(sell_result))
+            axs = get_balance("AXS")
+            if axs > 0.00008:
+                sell_result = upbit.sell_market_order("KRW-AXS", axs*0.9995)
+                post_message(myToken,"#crypto", "AXS buy : " +str(sell_result))
         time.sleep(1)
     except Exception as e:
         print(e)
